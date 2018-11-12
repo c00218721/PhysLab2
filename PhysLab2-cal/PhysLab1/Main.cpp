@@ -22,10 +22,12 @@
 int main()
 {
 	bool spacePressed = false;
+	bool vPressed = false;
+	bool bPressed = false;
 
 	sf::RenderWindow window(sf::VideoMode(800, 800), "Go Physics!!");
 
-	sf::CircleShape shape(.5f);
+	sf::CircleShape shape(5.5f);
 	sf::RectangleShape ground(sf::Vector2f(800,800));
 
 
@@ -36,6 +38,7 @@ int main()
 	sf::Vector2f position(400, 400);
 	sf::Vector2f gPos(0, 605.8);
 	
+	float pixelToMeters = 20;
 
 	sf::Vector2f gravity(0.0f, 9.8f);
 
@@ -85,51 +88,102 @@ int main()
 			window.clear();
 
 			// update position and velocity here using equations in lab sheet using timeChange as  timeSinceLastUpdate.asSeconds().
-			
+			//velocity = u
+			//gravity = a
+			//time = t
+			//therefor  velocity = velocity + gravity * time 
+			//is v =  u +a*t
+			//and	distance = distanceTimeZero + velocity*time + .5*gravity*(time*time)
+			// is s = s0 + u*t + .5*a*(t*t)
 			position = position + velocity * time + 0.5f * gravity*(time * time);
 			velocity = velocity + gravity * time;
 
-			if (position.y > 605)
+			///////////////////////////////////////////////////////////////////
+			/// 
+			///		basic movement
+			/// 
+			if (position.y > 605 - 11)
 			{
-				velocity.y = 0;
-				position.y = 605;
+				velocity.y = -.5 * velocity.y;
+				position.y = 605 - 11;
 			}
-
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && position.y > 604 && spacePressed == false)
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && position.y > 604 - 11 && spacePressed == false)
 			{
 
 				velocity.y = -26;
 				spacePressed = true;
 			}
-
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+			{
+				position.y = 400;
+				velocity.y = 0;
+			}
 			//to stop the spamming of space to make it look like its bouncing
-			if(spacePressed == true)
+			if (spacePressed == true)
 			{
 				if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 				{
 					spacePressed = false;
 				}
 			}
-
-
-
-			float seconds = (2 * 26) / (9.8);
+			///////////////////////////////////////////////////////////////////
+			 
 			
 
+			///////////////////////////////////////////////////////////////////
+			///		
+			///		increase angle of projection
+			/// 
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::B) && !bPressed) 
+			{
+				velocity.x = velocity.x + 5;
+				bPressed = true;
+			}
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::B))
+			{
+				bPressed = false;
+			}
+			///////////////////////////////////////////////////////////////////
+
+
+
+			///////////////////////////////////////////////////////////////////
+			/// 
+			///		decrease angle of projection
+			/// 
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::V) && !vPressed)
+			{
+				velocity.x = velocity.x - 5;
+				vPressed = true;
+			}
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::V))
+			{
+				vPressed = false;
+			}
+			///////////////////////////////////////////////////////////////////
+		
+
+
+
+			float secs = (2 * 26) / (9.8);
 			float maxHeight = (26 * 26) / (2 * 9.8);
 
+			///////////////////////////////////////////////////////////////////
+			/// 
+			///		sets up the texts
+			/// 
 			predictedTime.setPosition(0, 0);
 			predictedTime.setFont(m_font);
 			predictedTime.setCharacterSize(15);
 			predictedTime.setFillColor(sf::Color::White);
-			predictedTime.setString(std::to_string(seconds));
+			predictedTime.setString(std::to_string(secs));
 
 			maxHeightText.setPosition(0, 40);
 			maxHeightText.setFont(m_font);
 			maxHeightText.setCharacterSize(15);
 			maxHeightText.setFillColor(sf::Color::White);
 			maxHeightText.setString(std::to_string(maxHeight));
-
+			///////////////////////////////////////////////////////////////////
 		
 
  		
