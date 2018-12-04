@@ -1,6 +1,8 @@
 ﻿  Main.cpp
-c:\users\c00218721\desktop\physlab2\physlab2-cal\physlab1\main.cpp(39): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\c00218721\desktop\physlab2\physlab2-cal\physlab1\main.cpp(107): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\c00218721\desktop\physlab2\physlab2-cal\physlab1\main.cpp(168): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\c00218721\desktop\physlab2\physlab2-cal\physlab1\main.cpp(169): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\c00218721\desktop\physlab2\physlab2-cal\physlab1\main.cpp(40): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\c00218721\desktop\physlab2\physlab2-cal\physlab1\main.cpp(108): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\c00218721\desktop\physlab2\physlab2-cal\physlab1\main.cpp(137): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\c00218721\desktop\physlab2\physlab2-cal\physlab1\main.cpp(142): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\c00218721\desktop\physlab2\physlab2-cal\physlab1\main.cpp(179): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\c00218721\desktop\physlab2\physlab2-cal\physlab1\main.cpp(180): warning C4305: 'initializing': truncation from 'double' to 'float'
   PhysLab1.vcxproj -> C:\Users\c00218721\Desktop\PhysLab2\PhysLab2-cal\Debug\PhysLab1.exe

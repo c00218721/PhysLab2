@@ -22,6 +22,8 @@
 int main()
 {
 	bool spacePressed = false;
+	bool yPressed = false;
+	bool uPressed = false;
 	bool vPressed = false;
 	bool bPressed = false;
 
@@ -35,7 +37,8 @@ int main()
 	ground.setFillColor(sf::Color::Blue);
 
 	sf::Vector2f velocity(0, 0);
-	sf::Vector2f position(400, 400);
+	sf::Vector2f angleOfProjection(0, 0);
+	sf::Vector2f position(10, 750);
 	sf::Vector2f gPos(0, 605.8);
 	
 	float pixelToMeters = 20;
@@ -95,8 +98,8 @@ int main()
 			//is v =  u +a*t
 			//and	distance = distanceTimeZero + velocity*time + .5*gravity*(time*time)
 			// is s = s0 + u*t + .5*a*(t*t)
-			position = position + velocity * time + 0.5f * gravity*(time * time);
-			velocity = velocity + gravity * time;
+			position = position + angleOfProjection * time + 0.5f * gravity*(time * time);
+			angleOfProjection = angleOfProjection + gravity * time;
 
 			///////////////////////////////////////////////////////////////////
 			/// 
@@ -104,19 +107,19 @@ int main()
 			/// 
 			if (position.y > 605 - 11)
 			{
-				velocity.y = -.5 * velocity.y;
+				angleOfProjection.y = -.5 * angleOfProjection.y;
 				position.y = 605 - 11;
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && position.y > 604 - 11 && spacePressed == false)
 			{
 
-				velocity.y = -26;
+				angleOfProjection.y = -26;
 				spacePressed = true;
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 			{
-				position.y = 400;
-				velocity.y = 0;
+				position.y = 595;
+				angleOfProjection.y = 0;
 			}
 			//to stop the spamming of space to make it look like its bouncing
 			if (spacePressed == true)
@@ -128,15 +131,22 @@ int main()
 			}
 			///////////////////////////////////////////////////////////////////
 			 
-			
-
 			///////////////////////////////////////////////////////////////////
-			///		
-			///		increase angle of projection
-			/// 
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::B) && !bPressed) 
+			/// controls the angle of projection
+			
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::V) && !vPressed)
 			{
-				velocity.x = velocity.x + 5;
+				angleOfProjection.y =  velocity.y - .1;
+				vPressed = true;
+			}
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::V))
+			{
+				vPressed = false;
+			}
+			
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::B))
+			{
+				angleOfProjection.x = velocity.y + .1;
 				bPressed = true;
 			}
 			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::B))
@@ -144,21 +154,34 @@ int main()
 				bPressed = false;
 			}
 			///////////////////////////////////////////////////////////////////
+			///		
+			///		increase angle of projection
+			/// 
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::U) && !uPressed) 
+			{
+				angleOfProjection.x = angleOfProjection.x + 5;
+				uPressed = true;
+			}
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::U))
+			{
+				uPressed = false;
+			}
+			///////////////////////////////////////////////////////////////////
 
 
-
+ 
 			///////////////////////////////////////////////////////////////////
 			/// 
 			///		decrease angle of projection
 			/// 
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::V) && !vPressed)
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y) && !yPressed)
 			{
-				velocity.x = velocity.x - 5;
-				vPressed = true;
+				angleOfProjection.x = angleOfProjection.x - 5;
+				yPressed = true;
 			}
-			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::V))
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Y))
 			{
-				vPressed = false;
+				yPressed = false;
 			}
 			///////////////////////////////////////////////////////////////////
 		
